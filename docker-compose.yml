@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  forumdb:
+    image: postgres
+    container_name: discogsdb
+    restart: always
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=discogs123
+      - POSTGRES_DB=discogsdb
+    ports:
+      - 5432:5432
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  dbdata:
