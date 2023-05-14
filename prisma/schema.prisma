@@ -6,3 +6,18 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model DiscogsArtist {
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  createdAt DateTime  @default(now())
+  releases  DiscogsRelease[]
+}
+model DiscogsRelease {
+  id        Int       @id @default(autoincrement())
+  title     String
+  year      Int
+  createdAt DateTime  @default(now())
+  artistId  Int
+  artist    DiscogsArtist @relation(fields: [artistId], references: [id])
+}
