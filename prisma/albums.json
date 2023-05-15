@@ -1,0 +1,124 @@
+{
+    "artists": [
+        {
+            "name": "The Beatles",
+            "genre": "Rock",
+            "albums": [
+                {"title": "Abbey Road", "year": 1969},
+                {"title": "Sgt. Pepper's Lonely Hearts Club Band", "year": 1967}
+            ]
+        },
+        {
+            "name": "Madonna",
+            "genre": "Pop",
+            "albums": [
+                {"title": "Like a Virgin", "year": 1984},
+                {"title": "Ray of Light", "year": 1998}
+            ]
+        },
+        {
+            "name": "Bob Marley",
+            "genre": "Reggae",
+            "albums": [
+                {"title": "Exodus", "year": 1977},
+                {"title": "Kaya", "year": 1978}
+            ]
+        },
+        {
+            "name": "Miles Davis",
+            "genre": "Jazz",
+            "albums": [
+                {"title": "Kind of Blue", "year": 1959},
+                {"title": "Bitches Brew", "year": 1970}
+            ]
+        },
+        {
+            "name": "Beyoncé",
+            "genre": "R&B",
+            "albums": [
+                {"title": "Lemonade", "year": 2016},
+                {"title": "Beyoncé", "year": 2013}
+            ]
+        },
+        {
+            "name": "Daft Punk",
+            "genre": "Electronic",
+            "albums": [
+                {"title": "Random Access Memories", "year": 2013},
+                {"title": "Discovery", "year": 2001}
+            ]
+        },
+        {
+            "name": "Adele",
+            "genre": "Pop",
+            "albums": [
+                {"title": "21", "year": 2011},
+                {"title": "25", "year": 2015}
+            ]
+        },
+        {
+            "name": "Kendrick Lamar",
+            "genre": "Hip Hop",
+            "albums": [
+                {"title": "To Pimp a Butterfly", "year": 2015},
+                {"title": "DAMN.", "year": 2017}
+            ]
+        },
+        {
+            "name": "David Bowie",
+            "genre": "Rock",
+            "albums": [
+                {"title": "The Rise and Fall of Ziggy Stardust and the Spiders from Mars", "year": 1972},
+                {"title": "Heroes", "year": 1977}
+            ]
+        },
+        {
+            "name": "Amy Winehouse",
+            "genre": "Soul",
+            "albums": [
+                {"title": "Back to Black", "year": 2006},
+                {"title": "Frank", "year": 2003}
+            ]
+        },
+        {
+            "name": "Radiohead",
+            "genre": "Alternative Rock",
+            "albums": [
+                {"title": "OK Computer", "year": 1997},
+                {"title": "Kid A", "year": 2000}
+            ]
+        },
+        {
+            "name": "Taylor Swift",
+            "genre": "Pop",
+            "albums": [
+                {"title": "1989", "year": 2014},
+                {"title": "Folklore", "year": 2020}
+            ]
+        },
+        {
+            "name": "Drake",
+            "genre": "Hip Hop",
+            "albums": [
+                {"title": "Scorpion", "year": 2018},
+                {"title": "Views", "year": 2016}
+            ]
+        },
+        {
+            "name": "Nina Simone",
+            "genre": "Jazz",
+            "albums": [
+                {"title": "Little Girl Blue", "year": 1958},
+                {"title": "I Put a Spell on You", "year": 1965}
+            ]
+        },
+        {
+            "name": "Rihanna",
+            "genre": "R&B",
+            "albums": [
+                {"title": "Anti", "year": 2016},
+                {"title": "Loud", "year": 2010}
+            ]
+        }
+    ]
+}
