@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 app.get("/", async (req, res) => {
-  res.status(200).send("hola!");
+  res.status(200).json("hola!");
 });
 
 const { SERVER_PORT } = process.env;
