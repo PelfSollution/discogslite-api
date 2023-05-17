@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
 import morgan from "morgan";
 import dotenv from "dotenv";
@@ -10,8 +10,20 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 
-app.get("/", async (req, res) => {
-  res.status(200).json("hola!");
+app.get("/", async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    res.status(200).json("Bienvenido a Discogs!");
+  } catch (e) {
+    next(e);
+  }
+});
+
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  console.error(err.stack);
+  res.status(500).json({
+    type: err.constructor.name,
+    message: err.message,
+  });
 });
 
 const { SERVER_PORT } = process.env;
