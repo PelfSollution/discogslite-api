@@ -3,6 +3,8 @@ import cors from "cors";
 import morgan from "morgan";
 import dotenv from "dotenv";
 import artistsRouter from "./artists";
+import releasesRouter from "./releases";
+import genresRouter from "./genres";
 
 dotenv.config();
 
@@ -12,6 +14,8 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 app.use("/artists", artistsRouter);
+app.use("/releases", releasesRouter);
+app.use("/genres", genresRouter);
 
 app.get("/", async (req: Request, res: Response, next: NextFunction) => {
   try {
