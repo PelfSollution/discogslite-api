@@ -1,20 +1,48 @@
 # Backend en Typescript, Express y Prisma
+## Descripción
 
-Se trata de hacer un _backend_ usando Typescript, Express y Prisma. El _backend_ implementado en clase es el modelo a seguir. Para alumnos que lo hacen por primera vez y sienten algo de incomodidad, lo ideal es usar el modelo de guía y hacer un _backend_ cercano al original de tal manera que la práctica sea un repaso a fondo. Para los que estén más cómodos, lo ideal es innovar en algun aspecto y salirse parcialmente del modelo en ciertos momentos o explorar algún interés personal.
+Proyecto destinado a proporcionar un backend robusto y fácil de usar utilizando Typescript, Express y Prisma. La implementación se basa en el modelo presentado en clase y sirve como una guía sólida para los alumnos que se inician en el desarrollo backend.
 
-El modelo de datos debe ser original y algo personal de cada uno, quizás incluso una API que se podría hacer pública eventualmente. Es importante que el _backend_ incluya, para la mayoría de entidades, todas las operaciones CRUD (es decir, que no solo sea una API de puras consultas como la de [Pokémons](https://pokeapi.co)). Dado que el _backend_ tiene alrededor de 4 endpoints por entidad, es recomendable no sobrepasar las 5 o 6 entidades, de lo contrario el volumen de trabajo crece demasiado. Aún así, hay formas de controlar esa complejidad, así que si álguien tiene interés en hacer muchas entidades, podemos comentar cómo abordarlo.
+## Pre-requisitos
 
-Al usar Prisma, es quizás buena idea explorar proveedores de Prisma que no sean precisamente Postgres, ya que el coste de hacerlo es mínimo (aunque esto no es obligatorio para nada). Aparte de los proveedores locales alternativos a Postgres, existen también opciones en la nube equivalentes a Postgres como [PlanetScale](https://www.prisma.io/docs/guides/database/planetscale), [CockroachDB](https://www.prisma.io/docs/guides/database/cockroachdb) o [Supabase](https://www.prisma.io/docs/guides/database/supabase), bien explicadas en la documentación de Prisma.
+1. Necesitarás tener Node.js y npm instalados en tu máquina. Puedes descargarlos desde [aquí](https://nodejs.org/es/).
 
-## Entregable
+2. También debes tener instalado Prisma. Para instalarlo, utiliza el siguiente comando en tu terminal:
 
-Como anteriormente, para hacer esta práctica hay que:
-- Hacer un _fork_ de este repositorio.
-- Trabajar en el _fork_ haciendo commits regularmente (una práctica que aparece entera en un solo commit tendrá una nota muy baja o cero, hay que mostrar todo el proceso intermedio).
-- Al finalizar, se debe crear un `ZIP` del repositorio (que incluya el fichero `.env`!) y entregarlo en el [Campus Online de UPC School](https://talent.upc.edu) (habrá una tarea preparada para ello).
+`npm install @prisma/cli -g`
 
-El entregable es el código del proyecto, incluyendo:
-- `docker-compose.yml` si la base de datos corre bajo Docker.
-- El código completo del servidor.
-- Un fichero exportado de [Insomnia](https://insomnia.rest/download) con la lista de _endpoints_ que se han probado. (Esto es **extremadamente** relevante porque la corrección del backend, de no tener este fichero, es un trabajo muchísimo más tedioso!).
-- Si se necesitan credenciales para acceder a servicios de cloud (o incluso localmente), es importante incluir en el ZIP del campus el fichero `.env` con éstas. Es muy importante no subir ese fichero en GitHub (es decir, incluirlo en `.gitignore`).
+## Inicio rápido
+
+1. Clona el repositorio en tu máquina local utilizando `git clone`.
+
+2. Entra en el directorio del proyecto:
+
+`cd p3-backend-2023`
+
+3. Instala las dependencias del proyecto:
+
+`npm install`
+
+4. Inicia el proyecto:
+
+`npm run dev`
+
+## Comandos de scripts
+
+- `npm run dev`: Inicia el servidor en modo desarrollo.
+- `npm test`: Ejecuta los tests del proyecto (actualmente no se ha especificado ningún test).
+- `npm run seed`: Siembra la base de datos con datos iniciales.
+- `npm run cliente`: Inicia Prisma Studio, que es una interfaz visual para trabajar con tu base de datos.
+- `npm run reset-db`: Restablece la base de datos.
+- `npm run reload-db`: Recarga la base de datos ejecutando los comandos `reset-db` y `seed`.
+- `npm run prisma:generate`: Genera el cliente de Prisma.
+- `npm run prisma:migrate`: Ejecuta las migraciones de Prisma.
+- `npm start`: Inicia el servidor en modo producción.
+- `npm run prepare`: Prepara el proyecto para la producción.
+
+## Funcionalidades
+
+- [x] artists.ts - todas las operaciones CRUD básicas, para manejar la creación, lectura, actualización y eliminación de artistas
+- [] genres.ts - todas las operaciones CRUD básicas, para manejar la creación, lectura, actualización y eliminación de géneros
+- [] releases.ts - todas las operaciones CRUD básicas, para manejar la creación, lectura, actualización y eliminación de lanzamientos
+
