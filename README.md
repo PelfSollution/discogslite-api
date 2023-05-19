@@ -19,11 +19,15 @@ Proyecto destinado a proporcionar un backend robusto y fácil de usar utilizando
 
 `cd p3-backend-2023`
 
-3. Instala las dependencias del proyecto:
+3. Inicia el servicio de la base de datos con Docker Compose:
+
+`npm run docker:up`
+
+4. Instala las dependencias del proyecto:
 
 `npm install`
 
-4. Inicia el proyecto:
+5. Inicia el proyecto:
 
 `npm run dev`
 
