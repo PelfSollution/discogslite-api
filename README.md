@@ -50,3 +50,7 @@ Proyecto destinado a proporcionar un backend robusto y fácil de usar utilizando
 - [] genres.ts - todas las operaciones CRUD básicas, para manejar la creación, lectura, actualización y eliminación de géneros
 - [] releases.ts - todas las operaciones CRUD básicas, para manejar la creación, lectura, actualización y eliminación de lanzamientos
 
+## Insomnia
+
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Discogs%20API&uri=https%3A%2F%2Fgithub.com%2FPelfSollution%2Fp3-backend-2023%2Fblob%2Fb22d089b81cf00e39093db2c6228f375a80fccf6%2Finsomnia%2FInsomnia.json)
+
