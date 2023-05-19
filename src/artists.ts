@@ -1,5 +1,6 @@
 import { Router } from "express";
 import prisma from "./prisma-client";
+import { validateInput } from "./utils";
 
 const router = Router();
 
@@ -14,7 +15,7 @@ router.get("/", async (req, res, next) => {
 });
 
 // GET /artists/:id
-router.get("/:id", async (req, res, next) => {
+router.get("/:id", validateInput, async (req, res, next) => {
   try {
     const { id } = req.params;
     const artist = await prisma.discogsArtist.findUnique({
@@ -45,7 +46,7 @@ router.post("/", async (req, res, next) => {
 });
 
 // PUT /artists/:id
-router.put("/:id", async (req, res, next) => {
+router.put("/:id", validateInput, async (req, res, next) => {
   try {
     const { id } = req.params;
     const { name } = req.body;
@@ -65,7 +66,7 @@ router.put("/:id", async (req, res, next) => {
 });
 
 // DELETE /artists/:id
-router.delete("/:id", async (req, res, next) => {
+router.delete("/:id", validateInput, async (req, res, next) => {
   try {
     const { id } = req.params;
     const deletedArtist = await prisma.discogsArtist.delete({

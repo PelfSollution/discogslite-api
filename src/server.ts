@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import artistsRouter from "./artists";
 import releasesRouter from "./releases";
 import genresRouter from "./genres";
+import { errorHandler} from "./utils";
 
 dotenv.config();
 
@@ -36,6 +37,8 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     message: err.message,
   });
 });
+
+app.use(errorHandler); 
 
 const { SERVER_PORT } = process.env;
 app.listen(SERVER_PORT, () => {
