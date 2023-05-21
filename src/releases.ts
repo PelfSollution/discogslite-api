@@ -1,6 +1,6 @@
-import { Router } from "express";
+import { Router, Request, Response, NextFunction } from "express";
 import prisma from "./prisma-client";
-import { validateInput } from "./utils";
+import { validateBody, validateParams } from "./utils";
 
 const router = Router();
 
@@ -15,27 +15,43 @@ router.get("/", async (req, res, next) => {
 });
 
 // GET /releases/:id
-router.get("/:id", validateInput, async (req, res, next) => {
+router.get("/:id", validateParams(), async (req: Request, res: Response, next: NextFunction) => {
+  console.log('Entrando a GET /releases/:id');
   try {
     const { id } = req.params;
+    console.log(`Buscando el release con ID: ${id}`);
     const release = await prisma.discogsRelease.findUnique({
       where: { id: Number(id) },
     });
-
+    console.log(`Resultado de la consulta: ${release}`);
     if (!release) {
       return res.status(404).json({ error: "Release no encontrada" });
     }
-
+    console.log('Terminando GET /releases/:id');
     res.status(200).json({ Release: release });
   } catch (e) {
     next(e);
   }
 });
 
+
+
 // POST /releases
-router.post("/", async (req, res, next) => {
+router.post("/", validateBody(), async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { title, year, artistId, genreId } = req.body;
+    const artist = await prisma.discogsArtist.findUnique({
+      where: { id: Number(artistId) },
+    });
+    const genre = await prisma.discogsGenre.findUnique({
+      where: { id: Number(genreId) },
+    });
+    if (!artist) {
+      return res.status(400).json({ error: `El artista con ID ${artistId} no existe` });
+    }
+    if (!genre) {
+      return res.status(400).json({ error: `El género con ID ${genreId} no existe` });
+    }
     const newRelease = await prisma.discogsRelease.create({
       data: {
         title,
@@ -51,7 +67,7 @@ router.post("/", async (req, res, next) => {
 });
 
 // PUT /releases/:id
-router.put("/:id", validateInput, async (req, res, next) => {
+router.put("/:id", validateParams(), validateBody(), async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
     const { title, year, artistId, genreId } = req.body;
@@ -76,7 +92,7 @@ router.put("/:id", validateInput, async (req, res, next) => {
 });
 
 // DELETE /releases/:id
-router.delete("/:id", validateInput, async (req, res, next) => {
+router.delete("/:id", validateParams(), async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
     const deletedRelease = await prisma.discogsRelease.delete({
