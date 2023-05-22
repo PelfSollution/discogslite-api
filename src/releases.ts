@@ -18,17 +18,13 @@ router.get(
   "/:id",
   validateParams(),
   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    console.log("Entrando a GET /releases/:id");
     const { id } = req.params;
-    console.log(`Buscando el release con ID: ${id}`);
     const release = await prisma.discogsRelease.findUnique({
       where: { id: Number(id) },
     });
-    console.log(`Resultado de la consulta: ${release}`);
     if (!release) {
       return res.status(404).json({ error: "Release no encontrada" });
     }
-    console.log("Terminando GET /releases/:id");
     res.status(200).json({ Release: release });
   })
 );
