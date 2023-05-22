@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 import artistsRouter from "./artists";
 import releasesRouter from "./releases";
 import genresRouter from "./genres";
-import { errorHandler} from "./utils";
+import { errorHandler, asyncHandler } from "./utils";
 
 dotenv.config();
 
@@ -18,19 +18,18 @@ app.use("/artists", artistsRouter);
 app.use("/releases", releasesRouter);
 app.use("/genres", genresRouter);
 
-app.get("/", async (req: Request, res: Response, next: NextFunction) => {
-  try {
+app.get(
+  "/",
+  asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     res.status(200).json("Bienvenido a Discogs!");
-  } catch (e) {
-    next(e);
-  }
-});
+  })
+);
 
 app.use((req: Request, res: Response) => {
   res.status(404).json({ error: "Ruta no encontrada." });
 });
 
-app.use(errorHandler); 
+app.use(errorHandler);
 
 const { SERVER_PORT } = process.env;
 app.listen(SERVER_PORT, () => {

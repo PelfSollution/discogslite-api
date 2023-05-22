@@ -1,6 +1,14 @@
 import { Request, Response, NextFunction } from "express";
 import { check, validationResult } from "express-validator";
 
+export function asyncHandler(
+  fn: (req: Request, res: Response, next: NextFunction) => Promise<any>
+) {
+  return (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    return Promise.resolve(fn(req, res, next)).catch(next);
+  };
+}
+
 export function errorHandler(
   err: Error,
   req: Request,
