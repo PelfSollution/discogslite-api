@@ -27,7 +27,15 @@ Proyecto destinado a proporcionar un backend robusto y fácil de usar utilizando
 
 `npm install`
 
-5. Inicia el proyecto:
+5. Generar migración schema.prisma
+
+`npx prisma migrate dev`
+
+6. Ejecutar seed.ts para rellenar la bbdd
+
+`npm run seed`
+
+7. Iniciar el Servidor:
 
 `npm run dev`
 
@@ -52,7 +60,7 @@ Proyecto destinado a proporcionar un backend robusto y fácil de usar utilizando
 
 ## Pendientes
 - [x] Mejorar control de entradas - errores, que el id sea númerico, rutas erroneas, también para saber lo que esta pasando (si se borra un artista, que artista se ha borrado), si se borran los lanzamientos asociados también avisar
-- [] Deploy
+- [] Deploy Digital Ocean
 - 
 
 
