@@ -1,6 +1,6 @@
 import { Router, Request, Response, NextFunction } from "express";
 import prisma from "./prisma-client";
-import { validateBody, validateParams } from "./utils";
+import { validateArtistBody, validateParams } from "./utils";
 
 const router = Router();
 
@@ -39,7 +39,7 @@ router.get(
 // POST /genres
 router.post(
   "/",
-  validateBody(),
+  validateArtistBody(),
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { name } = req.body;
@@ -57,7 +57,7 @@ router.post(
 router.put(
   "/:id",
   validateParams(),
-  validateBody(),
+  validateArtistBody(),
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { id } = req.params;

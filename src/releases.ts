@@ -1,6 +1,6 @@
 import { Router, Request, Response, NextFunction } from "express";
 import prisma from "./prisma-client";
-import { validateBody, validateParams } from "./utils";
+import { validateReleaseBody , validateParams } from "./utils";
 
 const router = Router();
 
@@ -41,7 +41,7 @@ router.get(
 // POST /releases
 router.post(
   "/",
-  validateBody(),
+  validateReleaseBody(),
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { title, year, artistId, genreId } = req.body;
@@ -80,7 +80,7 @@ router.post(
 router.put(
   "/:id",
   validateParams(),
-  validateBody(),
+  validateReleaseBody(),
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { id } = req.params;

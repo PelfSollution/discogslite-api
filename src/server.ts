@@ -30,14 +30,6 @@ app.use((req: Request, res: Response) => {
   res.status(404).json({ error: "Ruta no encontrada." });
 });
 
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  console.error(err.stack);
-  res.status(500).json({
-    type: err.constructor.name,
-    message: err.message,
-  });
-});
-
 app.use(errorHandler); 
 
 const { SERVER_PORT } = process.env;
