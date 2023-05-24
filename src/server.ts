@@ -37,24 +37,29 @@ app.use((req: Request, res: Response) => {
 
 app.use(errorHandler);
 
-const privateKey = fs.readFileSync(
-  "/etc/letsencrypt/live/discogs-api.freeddns.org/privkey.pem",
-  "utf8"
-);
-const certificate = fs.readFileSync(
-  "/etc/letsencrypt/live/discogs-api.freeddns.org/fullchain.pem",
-  "utf8"
-);
-
-const httpsOptions = {
-  key: privateKey,
-  cert: certificate,
-};
-
-const server = https.createServer(httpsOptions, app);
-
 const { SERVER_PORT } = process.env;
 
-server.listen(SERVER_PORT, () => {
-  console.log(`Discogs API listening on:${SERVER_PORT}!!`);
+app.listen(SERVER_PORT, () => {
+  try {
+    const privateKey = fs.readFileSync(
+      "/etc/letsencrypt/live/discogs-api.freeddns.org/privkey.pem",
+      "utf8"
+    );
+    const certificate = fs.readFileSync(
+      "/etc/letsencrypt/live/discogs-api.freeddns.org/fullchain.pem",
+      "utf8"
+    );
+
+    const httpsOptions = {
+      key: privateKey,
+      cert: certificate,
+    };
+
+    const server = https.createServer(httpsOptions, app);
+
+    console.log(`Discogs API listening on:${SERVER_PORT}!!`);
+  } catch (error) {
+    console.error("Error reading SSL certificate files:", error);
+  }
 });
+
