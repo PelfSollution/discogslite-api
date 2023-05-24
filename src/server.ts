@@ -58,9 +58,7 @@ app.listen(SERVER_PORT, () => {
 
     const server = https.createServer(httpsOptions, app);
 
-    server.listen(SERVER_PORT, () => {
-      console.log(`Discogs API listening on:${SERVER_PORT}!!`);
-    });
+    console.log(`Discogs API listening on:${SERVER_PORT}!!`);
   } catch (error) {
     console.error("Error reading SSL certificate files:", error);
   }
