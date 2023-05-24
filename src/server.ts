@@ -56,6 +56,9 @@ app.listen(SERVER_PORT, () => {
       cert: certificate,
     };
 
+    console.log('Private Key Length:', httpsOptions.key.length);
+    console.log('Certificate Length:', httpsOptions.cert.length);
+    
     const server = https.createServer(httpsOptions, app);
 
     console.log(`Discogs API listening on:${SERVER_PORT}!!`);
