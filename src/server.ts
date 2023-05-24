@@ -6,6 +6,8 @@ import artistsRouter from "./artists";
 import releasesRouter from "./releases";
 import genresRouter from "./genres";
 import { errorHandler, asyncHandler } from "./utils";
+import https from "https";
+import fs from "fs";
 
 dotenv.config();
 
@@ -25,13 +27,34 @@ app.get(
   })
 );
 
+app.get("/insomnia.json", (req, res) => {
+  res.sendFile(__dirname + "../insomnia/insomnia.json");
+});
+
 app.use((req: Request, res: Response) => {
   res.status(404).json({ error: "Ruta no encontrada." });
 });
 
 app.use(errorHandler);
 
+const privateKey = fs.readFileSync(
+  "/etc/letsencrypt/live/discogs-api.freeddns.org/privkey.pem",
+  "utf8"
+);
+const certificate = fs.readFileSync(
+  "/etc/letsencrypt/live/discogs-api.freeddns.org/fullchain.pem",
+  "utf8"
+);
+
+const httpsOptions = {
+  key: privateKey,
+  cert: certificate,
+};
+
+const server = https.createServer(httpsOptions, app);
+
 const { SERVER_PORT } = process.env;
-app.listen(SERVER_PORT, () => {
+
+server.listen(SERVER_PORT, () => {
   console.log(`Discogs API listening on:${SERVER_PORT}!!`);
 });
