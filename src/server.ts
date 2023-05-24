@@ -38,28 +38,28 @@ app.use((req: Request, res: Response) => {
 
 app.use(errorHandler);
 
-const { SERVER_PORT } = process.env;
+const SERVER_PORT = 443;
 
-app.listen(SERVER_PORT, () => {
-  try {
-    const privateKey = fs.readFileSync(
-      path.resolve(__dirname, '../../sslcerts/privkey.pem'),
-      "utf8"
-    );
-    const certificate = fs.readFileSync(
-      path.resolve(__dirname, '../../sslcerts/fullchain.pem'),
-      "utf8"
-    );
+try {
+  const privateKey = fs.readFileSync(
+    path.resolve(__dirname, '../../sslcerts/privkey.pem'),
+    "utf8"
+  );
+  const certificate = fs.readFileSync(
+    path.resolve(__dirname, '../../sslcerts/fullchain.pem'),
+    "utf8"
+  );
 
-    const httpsOptions = {
-      key: privateKey,
-      cert: certificate,
-    };
+  const httpsOptions = {
+    key: privateKey,
+    cert: certificate,
+  };
 
-    const server = https.createServer(httpsOptions, app);
+  const server = https.createServer(httpsOptions, app);
 
+  server.listen(SERVER_PORT, () => {
     console.log(`Discogs API listening on:${SERVER_PORT}!!`);
-  } catch (error) {
-    console.error("Error reading SSL certificate files:", error);
-  }
-});
+  });
+} catch (error) {
+  console.error("Error reading SSL certificate files:", error);
+}
