@@ -8,6 +8,7 @@ import genresRouter from "./genres";
 import { errorHandler, asyncHandler } from "./utils";
 import https from "https";
 import fs from "fs";
+import path from 'path';
 
 dotenv.config();
 
@@ -42,11 +43,11 @@ const { SERVER_PORT } = process.env;
 app.listen(SERVER_PORT, () => {
   try {
     const privateKey = fs.readFileSync(
-      "/etc/letsencrypt/live/discogs-api.freeddns.org/privkey.pem",
+      path.resolve(__dirname, '../../sslcerts/privkey.pem'),
       "utf8"
     );
     const certificate = fs.readFileSync(
-      "/etc/letsencrypt/live/discogs-api.freeddns.org/fullchain.pem",
+      path.resolve(__dirname, '../../sslcerts/fullchain.pem'),
       "utf8"
     );
 
@@ -62,4 +63,3 @@ app.listen(SERVER_PORT, () => {
     console.error("Error reading SSL certificate files:", error);
   }
 });
-
