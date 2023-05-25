@@ -60,9 +60,13 @@ Proyecto destinado a proporcionar un backend robusto y fácil de usar utilizando
 
 ## Pendientes
 - [x] Mejorar control de entradas - errores, que el id sea númerico, rutas erroneas, también para saber lo que esta pasando (si se borra un artista, que artista se ha borrado), si se borran los lanzamientos asociados también avisar
-- [x] Deploy Digital Ocean
+- [x] Deploy Digital Ocean 
+      - https://discogs-api.freeddns.org/
+      - https://discogs-api.freeddns.org/releases
+      - https://discogs-api.freeddns.org/artists
+      - https://discogs-api.freeddns.org/genres
 
 ## Insomnia
 
-[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Discogs%20API&uri=https%3A%2F%2Fgithub.com%2FPelfSollution%2Fp3-backend-2023%2Fblob%2Fb22d089b81cf00e39093db2c6228f375a80fccf6%2Finsomnia%2FInsomnia.json)
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://discogs-api.freeddns.org/insomnia/insomnia.json)
 

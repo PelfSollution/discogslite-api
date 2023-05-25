@@ -8,7 +8,7 @@ import genresRouter from "./genres";
 import { errorHandler, asyncHandler } from "./utils";
 import https from "https";
 import fs from "fs";
-import path from 'path';
+import path from "path";
 
 dotenv.config();
 
@@ -28,8 +28,8 @@ app.get(
   })
 );
 
-app.get("/insomnia.json", (req, res) => {
-  res.sendFile(__dirname + "../insomnia/insomnia.json");
+app.get("/insomnia/insomnia.json", (req, res) => {
+  res.sendFile(path.join(__dirname, "../insomnia/insomnia.json"));
 });
 
 app.use((req: Request, res: Response) => {
@@ -43,11 +43,11 @@ const { SERVER_PORT } = process.env;
 app.listen(SERVER_PORT, () => {
   try {
     const privateKey = fs.readFileSync(
-      path.resolve(__dirname, '../../sslcerts/privkey.pem'),
+      path.resolve(__dirname, "../../sslcerts/privkey.pem"),
       "utf8"
     );
     const certificate = fs.readFileSync(
-      path.resolve(__dirname, '../../sslcerts/fullchain.pem'),
+      path.resolve(__dirname, "../../sslcerts/fullchain.pem"),
       "utf8"
     );
 
@@ -56,9 +56,9 @@ app.listen(SERVER_PORT, () => {
       cert: certificate,
     };
 
-    console.log('Private Key Length:', httpsOptions.key.length);
-    console.log('Certificate Length:', httpsOptions.cert.length);
-    
+    console.log("Private Key Length:", httpsOptions.key.length);
+    console.log("Certificate Length:", httpsOptions.cert.length);
+
     const server = https.createServer(httpsOptions, app);
 
     console.log(`Discogs API listening on:${SERVER_PORT}!!`);
