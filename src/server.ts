@@ -28,8 +28,12 @@ app.get(
   })
 );
 
-app.get("/insomnia/insomnia.json", (req, res) => {
-  res.sendFile(path.join(__dirname, "../insomnia/insomnia.json"));
+app.get("/insomnia/insomnia.json", (req, res, next) => {
+  res.sendFile(path.resolve(__dirname, '../insomnia/insomnia.json'), (err) => {
+    if (err) {
+      next(err);
+    }
+  });
 });
 
 app.use((req: Request, res: Response) => {
