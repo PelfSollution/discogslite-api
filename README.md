@@ -57,14 +57,18 @@ Proyecto destinado a proporcionar un backend robusto y fácil de usar utilizando
 - [x] artists.ts - todas las operaciones CRUD básicas, para manejar la creación, lectura, actualización y eliminación de artistas
 - [x] genres.ts - todas las operaciones CRUD básicas, para manejar la creación, lectura, actualización y eliminación de géneros
 - [x] releases.ts - todas las operaciones CRUD básicas, para manejar la creación, lectura, actualización y eliminación de lanzamientos
-
-## Pendientes
 - [x] Mejorar control de entradas - errores, que el id sea númerico, rutas erroneas, también para saber lo que esta pasando (si se borra un artista, que artista se ha borrado), si se borran los lanzamientos asociados también avisar
 - [x] Deploy Digital Ocean 
     - https://discogs-api.freeddns.org/
     - https://discogs-api.freeddns.org/releases
     - https://discogs-api.freeddns.org/artists
     - https://discogs-api.freeddns.org/genres
+
+## Pendientes (Extras si da tiempo)
+
+- [] Separar parte de la lógica de los controladores a los servicios
+- [] Soft Delete (al borrar un artista, no se borra de la bbdd, se pone un campo deletedAt con la fecha de borrado)
+- [] 
 
 ## Insomnia
 
