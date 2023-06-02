@@ -1,14 +1,17 @@
 import { Router, Request, Response, NextFunction } from "express";
-import prisma from "./prisma-client";
 import { validateArtistBody, validateParams, asyncHandler } from "./utils";
+import genresService from "./genres.service";
 
 const router = Router();
 
 // GET /genres
-router.get("/", asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    const genres = await prisma.discogsGenre.findMany();
+router.get(
+  "/",
+  asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const genres = await genresService.getAll();
     res.status(200).json({ Genres: genres });
-}));
+  })
+);
 
 // GET /genres/:id
 router.get(
@@ -16,9 +19,7 @@ router.get(
   validateParams(),
   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
-    const genre = await prisma.discogsGenre.findUnique({
-      where: { id: Number(id) },
-    });
+    const genre = await genresService.getById(Number(id));
 
     if (!genre) {
       return res.status(404).json({ error: "Género no encontrado" });
@@ -34,9 +35,7 @@ router.post(
   validateArtistBody(),
   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const { name } = req.body;
-    const newGenre = await prisma.discogsGenre.create({
-      data: { name },
-    });
+    const newGenre = await genresService.create(name);
     res.status(201).json({ Genre: newGenre });
   })
 );
@@ -49,10 +48,7 @@ router.put(
   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
     const { name } = req.body;
-    const updatedGenre = await prisma.discogsGenre.update({
-      where: { id: Number(id) },
-      data: { name },
-    });
+    const updatedGenre = await genresService.update(Number(id), name);
 
     if (!updatedGenre) {
       return res.status(404).json({ error: "Género no encontrado" });
@@ -68,9 +64,7 @@ router.delete(
   validateParams(),
   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
-    const deletedGenre = await prisma.discogsGenre.delete({
-      where: { id: Number(id) },
-    });
+    const deletedGenre = await genresService.delete(Number(id));
 
     if (!deletedGenre) {
       return res.status(404).json({ error: "Género no encontrado" });

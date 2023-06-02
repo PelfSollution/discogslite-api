@@ -7,6 +7,7 @@ import releasesRouter from "./releases";
 import genresRouter from "./genres";
 import { errorHandler, asyncHandler } from "./utils";
 import https from "https";
+import http from "http";
 import fs from "fs";
 import path from "path";
 
@@ -29,7 +30,7 @@ app.get(
 );
 
 app.get("/insomnia/insomnia.json", (req, res, next) => {
-  res.sendFile(path.resolve(__dirname, '../insomnia/insomnia.json'), (err) => {
+  res.sendFile(path.resolve(__dirname, "../insomnia/insomnia.json"), (err) => {
     if (err) {
       next(err);
     }
@@ -42,9 +43,9 @@ app.use((req: Request, res: Response) => {
 
 app.use(errorHandler);
 
-const { SERVER_PORT } = process.env;
+const { SERVER_PORT, NODE_ENV } = process.env;
 
-app.listen(SERVER_PORT, () => {
+if (NODE_ENV === "production") {
   try {
     const privateKey = fs.readFileSync(
       path.resolve(__dirname, "../../sslcerts/privkey.pem"),
@@ -65,8 +66,16 @@ app.listen(SERVER_PORT, () => {
 
     const server = https.createServer(httpsOptions, app);
 
-    console.log(`Discogs API listening on:${SERVER_PORT}!!`);
+    server.listen(SERVER_PORT, () => {
+      console.log(`Discogs API listening on HTTPS:${SERVER_PORT}!!`);
+    });
   } catch (error) {
     console.error("Error reading SSL certificate files:", error);
   }
-});
+} else {
+  const server = http.createServer(app);
+
+  server.listen(SERVER_PORT, () => {
+    console.log(`Discogs API listening on HTTP:${SERVER_PORT}!!`);
+  });
+}

@@ -1,6 +1,6 @@
 import { Router, Request, Response, NextFunction } from "express";
-import prisma from "./prisma-client";
 import { validateArtistBody, validateParams, asyncHandler } from "./utils";
+import artistsService from "./artists.service";
 
 const router = Router();
 
@@ -8,7 +8,7 @@ const router = Router();
 router.get(
   "/",
   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    const artists = await prisma.discogsArtist.findMany();
+    const artists = await artistsService.getAll();
     res.status(200).json({ Artists: artists });
   })
 );
@@ -19,9 +19,7 @@ router.get(
   validateParams(),
   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
-    const artist = await prisma.discogsArtist.findUnique({
-      where: { id: Number(id) },
-    });
+    const artist = await artistsService.getById(Number(id));
 
     if (!artist) {
       return res.status(404).json({ error: "Artista no encontrado" });
@@ -37,9 +35,7 @@ router.post(
   validateArtistBody(),
   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const { name } = req.body;
-    const newArtist = await prisma.discogsArtist.create({
-      data: { name },
-    });
+    const newArtist = await artistsService.create(name);
     res.status(201).json({ Artist: newArtist });
   })
 );
@@ -52,10 +48,7 @@ router.put(
   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
     const { name } = req.body;
-    const updatedArtist = await prisma.discogsArtist.update({
-      where: { id: Number(id) },
-      data: { name },
-    });
+    const updatedArtist = await artistsService.update(Number(id), name);
 
     if (!updatedArtist) {
       return res.status(404).json({ error: "Artista no encontrado" });
@@ -71,9 +64,7 @@ router.delete(
   validateParams(),
   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
-    const deletedArtist = await prisma.discogsArtist.delete({
-      where: { id: Number(id) },
-    });
+    const deletedArtist = await artistsService.delete(Number(id));
 
     if (!deletedArtist) {
       return res.status(404).json({ error: "Artista no encontrado" });
