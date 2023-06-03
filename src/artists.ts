@@ -13,6 +13,15 @@ router.get(
   })
 );
 
+// GET /artists/deleted (soft deleted)
+router.get(
+  "/deleted",
+  asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const deletedArtists = await artistsService.getAllDeleted();
+    res.status(200).json({ DeletedArtists: deletedArtists });
+  })
+);
+
 // GET /artists/:id
 router.get(
   "/:id",
@@ -91,13 +100,15 @@ router.delete(
   validateParams(),
   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
-    const deletedArtist = await artistsService.delete(Number(id));
+    const { artist, deletedReleases } = await artistsService.softDelete(
+      Number(id)
+    );
 
-    if (!deletedArtist) {
+    if (!artist) {
       return res.status(404).json({ error: "Artista no encontrado" });
     }
 
-    res.status(200).json({ Artist: deletedArtist });
+    res.status(200).json({ Artist: artist, DeletedReleases: deletedReleases });
   })
 );
 

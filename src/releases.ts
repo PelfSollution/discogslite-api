@@ -13,6 +13,15 @@ router.get(
   })
 );
 
+// GET /releases/deleted (soft deleted)
+router.get(
+  "/deleted",
+  asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const deletedReleases = await releasesService.getAllDeletedReleases();
+    res.status(200).json({ DeletedReleases: deletedReleases });
+  })
+);
+
 // GET /releases/:id
 router.get(
   "/:id",
@@ -21,12 +30,13 @@ router.get(
     const { id } = req.params;
     const release = await releasesService.getById(Number(id));
     if (!release) {
-      return res.status(404).json({ error: "Release no encontrada" });
+      return res
+        .status(404)
+        .json({ error: "Release no encontrada o eliminada" });
     }
     res.status(200).json({ Release: release });
   })
 );
-
 // GET /search/:title
 router.get(
   "/search/:title",
@@ -37,7 +47,6 @@ router.get(
   })
 );
 
-
 // POST /releases
 router.post(
   "/",
@@ -45,11 +54,9 @@ router.post(
   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const newRelease = await releasesService.create(req.body);
     if (!newRelease) {
-      return res
-        .status(400)
-        .json({
-          error: `No se pudo crear la release. Verifique los datos proporcionados.`,
-        });
+      return res.status(400).json({
+        error: `No se pudo crear la release. Verifique los datos proporcionados.`,
+      });
     }
     res.status(201).json({ Release: newRelease });
   })
@@ -76,7 +83,7 @@ router.delete(
   validateParams(),
   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
-    const deleted = await releasesService.delete(Number(id));
+    const deleted = await releasesService.softDelete(Number(id));
     if (!deleted) {
       return res.status(404).json({ error: "Release no encontrada" });
     }

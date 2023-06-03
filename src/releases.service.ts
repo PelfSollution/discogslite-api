@@ -2,13 +2,21 @@ import prisma from "./prisma-client";
 
 export default {
   async getAll() {
-    return prisma.discogsRelease.findMany();
+    return prisma.discogsRelease.findMany({
+      where: { deletedAt: null },
+    });
   },
 
   async getById(id: number) {
-    return prisma.discogsRelease.findUnique({
+    const release = await prisma.discogsRelease.findUnique({
       where: { id: Number(id) },
     });
+
+    if (release && release.deletedAt) {
+      return null;
+    }
+
+    return release;
   },
 
   async create(data: any) {
@@ -54,7 +62,21 @@ export default {
     });
     return deletedRelease;
   },
-  
+
+  async softDelete(id: number) {
+    return prisma.discogsRelease.update({
+      where: { id: Number(id) },
+      data: { deletedAt: new Date() },
+    });
+  },
+
+  async getAllDeletedReleases() {
+    return prisma.discogsRelease.findMany({
+      where: { deletedAt: { not: null } },
+      include: { artist: true },
+    });
+  },
+
   async searchByTitle(title: string) {
     return prisma.discogsRelease.findMany({
       where: {

@@ -63,11 +63,9 @@ Proyecto destinado a proporcionar un backend robusto y fácil de usar utilizando
     - https://discogs-api.freeddns.org/releases
     - https://discogs-api.freeddns.org/artists
     - https://discogs-api.freeddns.org/genres
-
-## Pendientes (Extras si da tiempo)
-
+    
 - [x] Separar parte de la lógica de los controladores a los servicios
-- [] Soft Delete (al borrar un artista, no se borra de la bbdd, se pone un campo deletedAt con la fecha de borrado)
+- [x] Soft Delete (al borrar un artista, no se borra de la bbdd, se pone un campo deletedAt con la fecha de borrado)
 
 
 ## Insomnia
