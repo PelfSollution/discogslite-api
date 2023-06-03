@@ -11,6 +11,7 @@ model DiscogsArtist {
   id        Int              @id @default(autoincrement())
   name      String           @unique
   createdAt DateTime         @default(now())
+  deletedAt DateTime?
   releases  DiscogsRelease[]
 }
 
@@ -19,8 +20,9 @@ model DiscogsRelease {
   title     String
   year      Int
   createdAt DateTime      @default(now())
+  deletedAt DateTime?
   artistId  Int
-  artist    DiscogsArtist @relation(fields: [artistId], references: [id])
+  artist    DiscogsArtist @relation(fields: [artistId], references: [id], onDelete: Cascade)
   genreId   Int
   genre     DiscogsGenre  @relation(fields: [genreId], references: [id])
 }
@@ -29,5 +31,6 @@ model DiscogsGenre {
   id        Int              @id @default(autoincrement())
   name      String           @unique
   createdAt DateTime         @default(now())
+  deletedAt DateTime?
   releases  DiscogsRelease[]
 }
