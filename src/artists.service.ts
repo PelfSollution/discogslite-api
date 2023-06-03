@@ -36,4 +36,13 @@ export default {
       include: { releases: true },
     });
   },
+  async searchByName(name: string) {
+    return prisma.discogsArtist.findMany({
+      where: {
+        name: {
+          contains: name,
+        },
+      },
+    });
+  },
 };

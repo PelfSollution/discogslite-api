@@ -29,6 +29,17 @@ router.get(
   })
 );
 
+// GET /search/:name
+
+router.get(
+  "/search/:name",
+  asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const { name } = req.params;
+    const artists = await artistsService.searchByName(name);
+    res.status(200).json({ Artists: artists });
+  })
+);
+
 // GET /artists/:id/releases
 router.get(
   "/:id/releases",
@@ -44,7 +55,6 @@ router.get(
     res.status(200).json({ Artist: artist, Releases: artist.releases });
   })
 );
-
 
 // POST /artists
 router.post(

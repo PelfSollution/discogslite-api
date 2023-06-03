@@ -54,4 +54,14 @@ export default {
     });
     return deletedRelease;
   },
+  
+  async searchByTitle(title: string) {
+    return prisma.discogsRelease.findMany({
+      where: {
+        title: {
+          contains: title,
+        },
+      },
+    });
+  },
 };

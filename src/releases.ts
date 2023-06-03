@@ -27,6 +27,17 @@ router.get(
   })
 );
 
+// GET /search/:title
+router.get(
+  "/search/:title",
+  asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const { title } = req.params;
+    const releases = await releasesService.searchByTitle(title);
+    res.status(200).json({ Releases: releases });
+  })
+);
+
+
 // POST /releases
 router.post(
   "/",
