@@ -1,4 +1,5 @@
 import prisma from "./prisma-client";
+import { DiscogsArtist } from "@prisma/client";
 
 export default {
   async getAll() {
@@ -41,6 +42,16 @@ export default {
     }
 
     const artists = genre.releases.map((release) => release.artist);
-    return artists;
+    const uniqueArtists = Object.values(
+      artists.reduce(
+        (acc: Record<string, DiscogsArtist>, artist: DiscogsArtist) => {
+          acc[artist.id.toString()] = artist; 
+          return acc;
+        },
+        {}
+      )
+    );
+
+    return uniqueArtists;
   },
 };
