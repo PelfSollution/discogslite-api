@@ -45,13 +45,16 @@ export default {
     const uniqueArtists = Object.values(
       artists.reduce(
         (acc: Record<string, DiscogsArtist>, artist: DiscogsArtist) => {
-          acc[artist.id.toString()] = artist; 
+          acc[artist.id.toString()] = artist;
           return acc;
         },
         {}
       )
     );
 
-    return uniqueArtists;
+    return {
+      genre: genre.name,
+      artists: uniqueArtists,
+    };
   },
 };
