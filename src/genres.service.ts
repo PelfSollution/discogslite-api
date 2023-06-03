@@ -29,4 +29,18 @@ export default {
       where: { id: Number(id) },
     });
   },
+
+  async getArtistsByGenre(genreId: number) {
+    const genre = await prisma.discogsGenre.findUnique({
+      where: { id: genreId },
+      include: { releases: { include: { artist: true } } },
+    });
+
+    if (!genre) {
+      return null;
+    }
+
+    const artists = genre.releases.map((release) => release.artist);
+    return artists;
+  },
 };

@@ -29,6 +29,22 @@ router.get(
   })
 );
 
+// GET /genres/:id/artists
+router.get(
+  "/:id/artists",
+  validateParams(),
+  asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    const artists = await genresService.getArtistsByGenre(Number(id));
+    if (!artists) {
+      return res
+        .status(404)
+        .json({ error: "Artistas no encontrados para este género" });
+    }
+    res.status(200).json({ Artists: artists });
+  })
+);
+
 // POST /genres
 router.post(
   "/",

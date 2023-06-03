@@ -29,4 +29,11 @@ export default {
       where: { id: Number(id) },
     });
   },
+
+  async getArtistWithReleases(id: number) {
+    return prisma.discogsArtist.findUnique({
+      where: { id: Number(id) },
+      include: { releases: true },
+    });
+  },
 };

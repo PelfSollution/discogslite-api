@@ -29,45 +29,48 @@ router.get(
 
 // POST /releases
 router.post(
-    "/",
-    validateReleaseBody(),
-    asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-      const newRelease = await releasesService.create(req.body);
-      if (!newRelease) {
-        return res.status(400).json({ error: `No se pudo crear la release. Verifique los datos proporcionados.` });
-      }
-      res.status(201).json({ Release: newRelease });
-    })
-  );
-  
-  // PUT /releases/:id
-  router.put(
-    "/:id",
-    validateParams(),
-    validateReleaseBody(),
-    asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-      const { id } = req.params;
-      const updatedRelease = await releasesService.update(Number(id), req.body);
-      if (!updatedRelease) {
-        return res.status(404).json({ error: "Release no encontrada" });
-      }
-      res.status(200).json({ Release: updatedRelease });
-    })
-  );
-  
-  // DELETE /releases/:id
-  router.delete(
-    "/:id",
-    validateParams(),
-    asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-      const { id } = req.params;
-      const deleted = await releasesService.delete(Number(id));
-      if (!deleted) {
-        return res.status(404).json({ error: "Release no encontrada" });
-      }
-      res.status(200).json({ message: "Release eliminada con éxito" });
-    })
-  );
-  
-  export default router;
-  
+  "/",
+  validateReleaseBody(),
+  asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const newRelease = await releasesService.create(req.body);
+    if (!newRelease) {
+      return res
+        .status(400)
+        .json({
+          error: `No se pudo crear la release. Verifique los datos proporcionados.`,
+        });
+    }
+    res.status(201).json({ Release: newRelease });
+  })
+);
+
+// PUT /releases/:id
+router.put(
+  "/:id",
+  validateParams(),
+  validateReleaseBody(),
+  asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    const updatedRelease = await releasesService.update(Number(id), req.body);
+    if (!updatedRelease) {
+      return res.status(404).json({ error: "Release no encontrada" });
+    }
+    res.status(200).json({ Release: updatedRelease });
+  })
+);
+
+// DELETE /releases/:id
+router.delete(
+  "/:id",
+  validateParams(),
+  asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    const deleted = await releasesService.delete(Number(id));
+    if (!deleted) {
+      return res.status(404).json({ error: "Release no encontrada" });
+    }
+    res.status(200).json({ message: "Release eliminada con éxito" });
+  })
+);
+
+export default router;

@@ -29,6 +29,23 @@ router.get(
   })
 );
 
+// GET /artists/:id/releases
+router.get(
+  "/:id/releases",
+  validateParams(),
+  asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    const artist = await artistsService.getArtistWithReleases(Number(id));
+
+    if (!artist) {
+      return res.status(404).json({ error: "Artista no encontrado" });
+    }
+
+    res.status(200).json({ Artist: artist, Releases: artist.releases });
+  })
+);
+
+
 // POST /artists
 router.post(
   "/",
