@@ -1,30 +1,62 @@
-# Discogs (Lite) Backend en Typescript, Express y Prisma
+# Discogs (discogslite-api) Backend en Typescript, Express y Prisma
 ## Descripción
 
 Este proyecto es una versión "lite" de lo que podría ser la API de Discogs. Se basa en la creación de un backend robusto y eficiente utilizando Typescript, Express y Prisma para gestionar entidades de artistas, lanzamientos y géneros. El diseño e implementación se inspiran en el modelo y práctica presentadas en clase, por lo que sirve como una guía sólida y práctica para aquellos que están iniciándose en el desarrollo backend. 
+## Estructura del Proyecto
+
+discogslite-api
+├── insomnia/
+│ └── insomnia.json
+├── src/
+│ ├── artists.ts
+│ ├── artists.service.ts
+│ ├── genres.ts
+│ ├── genres.service.ts
+│ ├── releases.ts
+│ ├── releases.service.ts
+│ ├── prisma-client.ts
+│ ├── utils.ts
+│ └── server.ts
+├── prisma/
+│ ├── migrations/
+│ ├── albums.json  
+│ ├── resetDb.ts
+│ ├── schema.prisma
+│ └── seed.ts
+├── .env.sample
+├── .gitignore
+├── README.md
+├── docker-compose.yml
+├── package-lock.json
+├── package.json
+└── tsconfig.json
+
+
 ## Pre-requisitos
 
 1. Necesitarás tener Node.js y npm instalados en tu máquina. Puedes descargarlos desde [aquí](https://nodejs.org/es/).
 
 2. También debes tener instalado Prisma. Para instalarlo, utiliza el siguiente comando en tu terminal:
 
-`npm install @prisma/cli -g`
+```npm install @prisma/cli -g```
 
-## Inicio rápido
+3. Necesitarás tener Docker instalado en tu máquina. Puedes descargarlo desde [aquí](https://www.docker.com/products/docker-desktop).
+
+## Instalación Local
 
 1. Clona el repositorio en tu máquina local utilizando `git clone`.
 
 2. Entra en el directorio del proyecto:
 
-`cd p3-backend-2023`
+`cd discogslite-api`
 
-3. Inicia el servicio de la base de datos con Docker Compose:
-
-`npm run docker:up`
-
-4. Instala las dependencias del proyecto:
+3. Instala las dependencias del proyecto:
 
 `npm install`
+
+4. Inicia el servicio de la base de datos con Docker Compose:
+
+`npm run docker:up`
 
 5. Generar migración schema.prisma
 
@@ -37,6 +69,18 @@ Este proyecto es una versión "lite" de lo que podría ser la API de Discogs. Se
 7. Iniciar el Servidor:
 
 `npm run dev`
+
+## Producción (Deploy)
+
+Para poner en producción tu aplicación, sigue estos pasos:
+
+1. Transpilación a código Javascript
+
+`npm run build`
+
+2. Inicia el servidor en modo producción: 
+
+`npm start`
 
 ## Comandos de scripts
 
