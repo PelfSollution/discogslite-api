@@ -1,7 +1,9 @@
-# Discogs (discogslite-api) Backend en Typescript, Express y Prisma
+# discogslite-api (Backend en Typescript, Express y Prisma)
+**p3-backend-2023** by David AR
+
 ## Descripción
 
-Este proyecto es una versión "lite" de lo que podría ser la API de Discogs. Se basa en la creación de un backend robusto y eficiente utilizando Typescript, Express y Prisma para gestionar entidades de artistas, lanzamientos y géneros. El diseño e implementación se inspiran en el modelo y práctica presentadas en clase, por lo que sirve como una guía sólida y práctica para aquellos que están iniciándose en el desarrollo backend. 
+**discogslite-api**, es un ejercicio del [_Posgrado en Full-Stack Web Technologies_](https://www.talent.upc.edu/esp/estudis/formacio/curs/313400/posgrado-full-stack-web-technologies/ "Posgrado en Full-Stack Web Technologies"). Se basa en la creación de una versión mínima "lite" de lo que podría ser la API de  [_Discogs_](https://www.discogs.com/ "Discogs"), utilizando Typescript, Express y Prisma para gestionar entidades de artistas, lanzamientos y géneros. El diseño e implementación se inspiran en el modelo y práctica presentadas en clase, por lo que sirve como una guía sólida y práctica para aquellos que están iniciándose en el desarrollo backend. 
 ## Estructura del Proyecto
 
 ```
@@ -32,8 +34,28 @@ discogslite-api
 ├── package.json
 └── tsconfig.json
 ```
+## Diagrama de Entidades y Relaciones (ER) de la BBDD
 
-
+```
+ DiscogsArtist
++----+-------+------------+------------+
+| id | name  | createdAt  | deletedAt  |
++----+-------+------------+------------+
+   |
+   | 1     n
+   ▼
+ DiscogsRelease
++----+-------+-----+------------+------------+----------+--------+
+| id | title | year| createdAt  | deletedAt  | artistId | genreId|
++----+-------+-----+------------+------------+----------+--------+
+  ▲
+  | 1     n
+  |
+ DiscogsGenre
++----+-------+------------+------------+
+| id | name  | createdAt  | deletedAt  |
++----+-------+------------+------------+
+```
 ## Pre-requisitos
 
 1. Necesitarás tener Node.js y npm instalados en tu máquina. Puedes descargarlos desde [aquí](https://nodejs.org/es/).
