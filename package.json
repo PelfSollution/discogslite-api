@@ -1,7 +1,7 @@
 {
-  "name": "p3-backend-2023",
+  "name": "discogslite-api",
   "version": "1.0.0",
-  "description": "Se trata de hacer un _backend_ usando Typescript, Express y Prisma. El _backend_ implementado en clase es el modelo a seguir...",
+  "description": "Este proyecto es una versión lite de lo que podría ser la API de Discogs. Se basa en la creación de un backend robusto y eficiente utilizando Typescript, Express y Prisma para gestionar entidades de artistas, lanzamientos y géneros. El diseño e implementación se inspiran en el modelo y práctica presentadas en clase, por lo que sirve como una guía sólida y práctica para aquellos que están iniciándose en el desarrollo backend.",
   "main": "build/server.js",
   "scripts": {
     "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node-esm' src/server.ts",

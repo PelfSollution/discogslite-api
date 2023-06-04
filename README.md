@@ -1,8 +1,7 @@
-# Backend en Typescript, Express y Prisma
+# Discogs (Lite) Backend en Typescript, Express y Prisma
 ## Descripción
 
-Proyecto destinado a proporcionar un backend robusto y fácil de usar utilizando Typescript, Express y Prisma. La implementación se basa en el modelo presentado en clase y sirve como una guía sólida para los alumnos que se inician en el desarrollo backend.
-
+Este proyecto es una versión "lite" de lo que podría ser la API de Discogs. Se basa en la creación de un backend robusto y eficiente utilizando Typescript, Express y Prisma para gestionar entidades de artistas, lanzamientos y géneros. El diseño e implementación se inspiran en el modelo y práctica presentadas en clase, por lo que sirve como una guía sólida y práctica para aquellos que están iniciándose en el desarrollo backend. 
 ## Pre-requisitos
 
 1. Necesitarás tener Node.js y npm instalados en tu máquina. Puedes descargarlos desde [aquí](https://nodejs.org/es/).
@@ -61,12 +60,17 @@ Proyecto destinado a proporcionar un backend robusto y fácil de usar utilizando
 - [x] Deploy Digital Ocean 
     - https://discogs-api.freeddns.org/
     - https://discogs-api.freeddns.org/releases
+    - https://discogs-api.freeddns.org/releases/search/t
+    - https://discogs-api.freeddns.org/releases/deleted (soft delete)
     - https://discogs-api.freeddns.org/artists
+    - https://discogs-api.freeddns.org/artists/1/releases
+    - https://discogs-api.freeddns.org/artists/search/t
+    - https://discogs-api.freeddns.org/artists/deleted (soft delete)
     - https://discogs-api.freeddns.org/genres
     
 - [x] Separar parte de la lógica de los controladores a los servicios
 - [x] Soft Delete (al borrar un artista, no se borra de la bbdd, se pone un campo deletedAt con la fecha de borrado)
-
+- [x] Llamadas a la API especiales como listar tal, buscar por nombre, etc
 
 ## Insomnia
 
