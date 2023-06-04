@@ -67,6 +67,8 @@ Este proyecto es una versión "lite" de lo que podría ser la API de Discogs. Se
     - https://discogs-api.freeddns.org/artists/search/t
     - https://discogs-api.freeddns.org/artists/deleted (soft delete)
     - https://discogs-api.freeddns.org/genres
+    - https://discogs-api.freeddns.org/genres/1/artists
+    
     
 - [x] Separar parte de la lógica de los controladores a los servicios
 - [x] Soft Delete (al borrar un artista, no se borra de la bbdd, se pone un campo deletedAt con la fecha de borrado)
