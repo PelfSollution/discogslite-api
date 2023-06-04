@@ -4,6 +4,7 @@
 Este proyecto es una versión "lite" de lo que podría ser la API de Discogs. Se basa en la creación de un backend robusto y eficiente utilizando Typescript, Express y Prisma para gestionar entidades de artistas, lanzamientos y géneros. El diseño e implementación se inspiran en el modelo y práctica presentadas en clase, por lo que sirve como una guía sólida y práctica para aquellos que están iniciándose en el desarrollo backend. 
 ## Estructura del Proyecto
 
+```
 discogslite-api
 ├── insomnia/
 │ └── insomnia.json
@@ -30,6 +31,7 @@ discogslite-api
 ├── package-lock.json
 ├── package.json
 └── tsconfig.json
+```
 
 
 ## Pre-requisitos
@@ -38,7 +40,7 @@ discogslite-api
 
 2. También debes tener instalado Prisma. Para instalarlo, utiliza el siguiente comando en tu terminal:
 
-```npm install @prisma/cli -g```
+`npm install @prisma/cli -g`
 
 3. Necesitarás tener Docker instalado en tu máquina. Puedes descargarlo desde [aquí](https://www.docker.com/products/docker-desktop).
 
